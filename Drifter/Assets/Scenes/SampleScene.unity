@@ -154,10 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 279408607}
-  acceleration: 0.01
-  maxAcceleration: 0.5
-  testPosition: {x: 0, y: 0, z: 0}
-  accelerationVector: {x: 1, y: 0, z: 0}
+  m_accelerationBase: 5
+  m_accelerationRate: 0.1
+  m_leftRightSteer: 0
 --- !u!4 &279408606
 Transform:
   m_ObjectHideFlags: 0
@@ -169,10 +168,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 963194228}
   - {fileID: 763570869}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &279408607
 Rigidbody:
@@ -188,7 +186,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &700318577
 GameObject:
@@ -281,10 +279,10 @@ Transform:
   m_GameObject: {fileID: 700318577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 4.3464, y: 4.3464, z: 4.3464}
+  m_LocalScale: {x: 22.681688, y: 22.681688, z: 22.681688}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -410,7 +408,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 279408606}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &763570870
 CapsuleCollider:
@@ -551,13 +549,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -10}
+  m_LocalRotation: {x: 0.2313753, y: -0, z: -0, w: 0.97286457}
+  m_LocalPosition: {x: 0, y: 15.33, z: -33.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 279408606}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 26.756, y: 0, z: 0}
 --- !u!1 &1538333119
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +612,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 11ef6279-1be2-426e-b352-04deae7d63ee
+    m_ActionId: e10432ac-2d87-401b-b950-5fc8cc20105e
     m_ActionName: MainGame/Steer[/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
@@ -633,5 +631,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

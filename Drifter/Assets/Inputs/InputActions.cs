@@ -21,18 +21,29 @@ public class @InputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Steer"",
                     ""type"": ""Value"",
-                    ""id"": ""11ef6279-1be2-426e-b352-04deae7d63ee"",
-                    ""expectedControlType"": ""Analog"",
+                    ""id"": ""e10432ac-2d87-401b-b950-5fc8cc20105e"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""4f856ecd-4222-46ee-a7df-6c9a6982fdd4"",
+                    ""id"": ""d72a33bc-f5d7-4243-a6b2-4f32068d981c"",
                     ""path"": ""<Keyboard>/a"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffed2797-ce3e-45dd-87a6-d8d82cfaa890"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
                     ""processors"": ""Scale(factor=-1)"",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Steer"",
@@ -41,9 +52,20 @@ public class @InputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""54efb339-6894-4dab-9887-a1a27d8b2cbb"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""id"": ""b6258dea-23fe-4c65-a6c9-4f4348d8f4cd"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=-1)"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Steer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""697ccdad-3119-4365-ad45-9ffebe061cab"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
                     ""processors"": ""Scale"",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Steer"",

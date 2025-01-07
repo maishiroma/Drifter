@@ -7,30 +7,36 @@ namespace Player
     {
         public Rigidbody m_rigidbody;
 
-        public float acceleration;
-        public float maxAcceleration;
+        public float m_accelerationBase;
+        [Range(0.01f, 1f)]
+        public float m_accelerationRate;
 
-        public Vector3 testPosition;
-        public Vector3 accelerationVector;
-
-        private void Start()
-        {
-            testPosition = m_rigidbody.position;
-
-        }
+        [SerializeField]
+        private float m_leftRightSteer;
+        private Vector3 accelerationVector;
 
         void FixedUpdate()
-        {
-            accelerationVector = Vector3.Lerp(accelerationVector, new Vector3(1f * acceleration, 0, 0), Time.deltaTime);
-            accelerationVector = Vector3.ClampMagnitude(accelerationVector, maxAcceleration);
-            testPosition += accelerationVector;
+        {               
+            if (Mathf.Approximately(accelerationVector.z, 0f))
+            {
+                accelerationVector = Vector3.Lerp(accelerationVector, new Vector3(0, 0, m_accelerationBase), Time.deltaTime * m_accelerationRate);
+            }
+            else
+            {
+                accelerationVector = Vector3.Lerp(accelerationVector, new Vector3(0, 0, accelerationVector.z * m_accelerationBase), Time.deltaTime * m_accelerationRate);
+            }
 
-            // TODO: Figure out how to move in a straight shot
+            accelerationVector = new Vector3(m_leftRightSteer, m_leftRightSteer, accelerationVector.z);
+
+            m_rigidbody.position += accelerationVector;
         }
 
         public void OnSteer(InputAction.CallbackContext context)
         {
-            acceleration *= context.ReadValue<float>();
+            float steerValue = context.ReadValue<float>();
+
+            // TODO: Need to figure out steering
+            //m_leftRightSteer = steerValue;
         }
     }
 }
