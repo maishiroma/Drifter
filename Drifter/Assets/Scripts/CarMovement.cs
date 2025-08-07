@@ -32,6 +32,8 @@ namespace Player
         private Vector3 m_accelerationVector;
         [SerializeField]
         private float m_leftRightSteer;
+        [SerializeField]
+        private float m_turnAmount;
 
         private void Start()
         {
@@ -83,16 +85,17 @@ namespace Player
         {
             if (Mathf.Abs(m_currentSpeed) > 0.1f)  // Only steer when moving
             {
-                float turnAmount = m_leftRightSteer * m_steerSpeed * Time.fixedDeltaTime;
+                m_turnAmount += m_leftRightSteer * m_steerSpeed * Time.fixedDeltaTime;
 
-                if (turnAmount == 0f)
+                if (m_leftRightSteer == 0f)
                 {
                     // Force the rotation to STOP
                     m_rigidbody.angularVelocity = Vector3.zero;
+                    m_turnAmount = Mathf.Lerp(0, m_turnAmount, 0.5f);
                 }
                 else
                 {
-                    m_rigidbody.AddTorque(Vector3.forward * turnAmount);
+                    m_rigidbody.AddTorque(Vector3.up * m_turnAmount);
                 }
 
             }
