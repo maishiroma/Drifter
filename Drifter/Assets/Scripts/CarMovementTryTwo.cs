@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using GlobalGameSystem;
 
 namespace Player
 {
@@ -19,6 +20,7 @@ namespace Player
         public WheelCollider collider;
         public MeshRenderer renderer;
         public WheelTypePosition typePosition;
+        public ParticleSystem smokeEffect;
     }
 
     public class CarMovementTryTwo : MonoBehaviour
@@ -28,6 +30,7 @@ namespace Player
 
         [Header("Car Body Components")]
         public Rigidbody carRB;
+        public GameObject tireParticles;
 
         [Header("Car Controls")]
         public bool isAccelerating;
@@ -42,6 +45,13 @@ namespace Player
         //Private Variables
         private float carSpeed;
         private float slipAngle;
+        private List<WheelData> rearWheels = new List<WheelData>();
+        private List<WheelData> frontWheels = new List<WheelData>();
+
+        private void Start()
+        {
+            SortWheelsIntoLists();
+        }
 
         private void FixedUpdate()
         {
@@ -51,6 +61,14 @@ namespace Player
             ApplyBrake();
             ApplySteering();
             ApplyWheelPositions();
+        }
+
+        private void Update()
+        {
+            if (steerInput != 0f && isAccelerating)
+            {
+                InstantidateSmoke();
+            }
         }
 
         public void OnAccelerate(InputAction.CallbackContext context)
@@ -93,7 +111,7 @@ namespace Player
                 acceleration = -1f;
             }
 
-            foreach (WheelData currOne in wheelsData)
+            foreach (WheelData currOne in rearWheels)
             {
                 if (currOne.typePosition == WheelTypePosition.RearLeft || currOne.typePosition == WheelTypePosition.RearRight)
                 {
@@ -110,16 +128,13 @@ namespace Player
                 braking = 0f;
             }
 
-            foreach (WheelData currOne in wheelsData)
+            foreach (WheelData currOne in rearWheels)
             {
-                if (currOne.typePosition == WheelTypePosition.FrontLeft || currOne.typePosition == WheelTypePosition.FrontRight)
-                {
-                    currOne.collider.brakeTorque = braking * (brakePower * 0.7f);
-                }
-                else if (currOne.typePosition == WheelTypePosition.RearLeft || currOne.typePosition == WheelTypePosition.RearRight)
-                {
-                    currOne.collider.brakeTorque = braking * (brakePower * 0.3f);
-                }
+                currOne.collider.brakeTorque = braking * (brakePower * 0.3f);
+            }
+            foreach (WheelData currOne in frontWheels)
+            {
+                currOne.collider.brakeTorque = braking * (brakePower * 0.7f);
             }
         }
 
@@ -136,7 +151,7 @@ namespace Player
         private void ApplySteering()
         {
             float steeringAngle = steerInput * steeringCurve.Evaluate(carSpeed);
-            foreach (WheelData currOne in wheelsData)
+            foreach (WheelData currOne in frontWheels)
             {
                 if (currOne.typePosition == WheelTypePosition.FrontLeft || currOne.typePosition == WheelTypePosition.FrontRight)
                 {
@@ -150,6 +165,31 @@ namespace Player
             for (int index = 0; index < wheelsData.Length; index++)
             {
                 UpdateWheel(wheelsData[index].collider, wheelsData[index].renderer);
+            }
+        }
+
+        private void InstantidateSmoke()
+        {
+            foreach (WheelData currOne in wheelsData)
+            {
+                Vector3 newSmokePos = new Vector3(currOne.collider.transform.position.x, currOne.collider.transform.position.y - 0.3f, currOne.collider.transform.position.z - 0.5f);
+                currOne.smokeEffect = Instantiate(tireParticles, newSmokePos, Quaternion.identity, currOne.collider.transform).GetComponent<ParticleSystem>();
+            }
+        }
+
+        private void SortWheelsIntoLists()
+        {
+            for (int currCounter = 0; currCounter < wheelsData.Length; currCounter++)
+            {
+                WheelData currOne = wheelsData[currCounter];
+                if (currOne.typePosition == WheelTypePosition.RearLeft || currOne.typePosition == WheelTypePosition.RearRight)
+                {
+                    rearWheels.Add(currOne);
+                }
+                else if (currOne.typePosition == WheelTypePosition.FrontLeft || currOne.typePosition == WheelTypePosition.FrontRight)
+                {
+                    frontWheels.Add(currOne);
+                }
             }
         }
 
