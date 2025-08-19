@@ -8,11 +8,17 @@ namespace GlobalGameSystem
     {
         public static GameManager Instance;
         
-        public Camera playerCamera;
+        [Header("Prefabs")]
+        public GameObject playerCameraPrefab;
+
+        [Space]
+        [Header("Dynamic References")]
+        public GameObject playerRef;
+        public GameObject playerCamera;
 
         private void Awake()
         {
-            if (Instance != null)
+            if (Instance == null)
             {
                 Instance = this;
                 DontDestroyOnLoad(Instance);
@@ -20,6 +26,19 @@ namespace GlobalGameSystem
             else
             {
                 Destroy(this);
+            }
+        }
+
+        private void Start()
+        {
+            if (playerRef == null)
+            {
+                playerRef = GameObject.FindGameObjectWithTag("Player");
+            }
+
+            if (playerCamera == null)
+            {
+                playerCamera = Instantiate(playerCameraPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             }
         }
     }

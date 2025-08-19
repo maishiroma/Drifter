@@ -42,6 +42,9 @@ namespace Player
         public float motorPower;
         public float brakePower;
 
+        [Header("Car Asthetics")]
+        public float slipAllowance = 0.1f;
+
         //Private Variables
         private float carSpeed;
         private float slipAngle;
@@ -51,6 +54,7 @@ namespace Player
         private void Start()
         {
             SortWheelsIntoLists();
+            InstantidateSmoke();
         }
 
         private void FixedUpdate()
@@ -60,15 +64,8 @@ namespace Player
             ApplyMotor();
             ApplyBrake();
             ApplySteering();
+            CheckSmoke();
             ApplyWheelPositions();
-        }
-
-        private void Update()
-        {
-            if (steerInput != 0f && isAccelerating)
-            {
-                InstantidateSmoke();
-            }
         }
 
         public void OnAccelerate(InputAction.CallbackContext context)
@@ -172,8 +169,30 @@ namespace Player
         {
             foreach (WheelData currOne in wheelsData)
             {
-                Vector3 newSmokePos = new Vector3(currOne.collider.transform.position.x, currOne.collider.transform.position.y - 0.3f, currOne.collider.transform.position.z - 0.5f);
+                Vector3 newSmokePos = new Vector3(currOne.collider.transform.position.x, currOne.collider.transform.position.y - 0.1f, currOne.collider.transform.position.z);
                 currOne.smokeEffect = Instantiate(tireParticles, newSmokePos, Quaternion.identity, currOne.collider.transform).GetComponent<ParticleSystem>();
+            }
+        }
+
+        private void CheckSmoke()
+        {
+            WheelHit[] wheelHits = new WheelHit[wheelsData.Length];
+            for (int i = 0; i < wheelsData.Length; i++)
+            {
+                WheelData currOne = wheelsData[i];
+                currOne.collider.GetGroundHit(out wheelHits[i]);
+            }
+
+            for (int i = 0; i < wheelHits.Length; i++)
+            {
+                if ((Mathf.Abs(wheelHits[i].sidewaysSlip) + Mathf.Abs(wheelHits[i].forwardSlip) > slipAllowance))
+                {
+                    wheelsData[i].smokeEffect.Play();
+                }
+                else
+                {
+                    wheelsData[i].smokeEffect.Stop();
+                }
             }
         }
 
