@@ -35,6 +35,7 @@ namespace Player
         [Header("Car Controls")]
         public bool isAccelerating;
         public bool isBraking;
+        public bool isBoosting;
         public float steerInput;
         public AnimationCurve steeringCurve;
 
@@ -102,7 +103,7 @@ namespace Player
 
         private void ApplyMotor()
         {
-            float acceleration = isAccelerating ? 1.0f : 0f;
+            float acceleration = isAccelerating ? 1f : 0f;
             if (CheckSlipping() && isBraking)
             {
                 acceleration = -1f;
@@ -113,6 +114,7 @@ namespace Player
                 if (currOne.typePosition == WheelTypePosition.RearLeft || currOne.typePosition == WheelTypePosition.RearRight)
                 {
                     currOne.collider.motorTorque = motorPower * acceleration;
+                    print(currOne.collider.motorTorque);
                 }
             }
         }
@@ -224,5 +226,4 @@ namespace Player
             mesh.transform.rotation = quat;
         }
     }
-
 }
