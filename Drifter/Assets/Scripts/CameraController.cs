@@ -18,7 +18,14 @@ namespace Player
         
         private void Start()
         {
-            playerRef = GameManager.Instance.playerRef.transform.GetChild(0).transform;
+            if (GameManager.Instance.playerRef.transform.GetChild(0).GetComponent<Rigidbody>())
+            {
+                playerRef = GameManager.Instance.playerRef.transform.GetChild(0).transform;
+            }
+            else
+            {
+                playerRef = GameManager.Instance.playerRef.transform;
+            }
             playerRB = playerRef.GetComponent<Rigidbody>();
         }
 
