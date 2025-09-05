@@ -9,15 +9,19 @@ namespace GameMechanics
     {
         public float boostPower;
 
+        Coroutine currOne;
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.transform.root.tag == "Player")
             {
-                CarMovementTryTwo currMovement = other.gameObject.transform.root.GetComponent<CarMovementTryTwo>();
+                ArcadeCarMovement currMovement = other.gameObject.transform.root.GetComponent<ArcadeCarMovement>();
 
-                Vector3 boostVelocity = currMovement.carRB.transform.forward * boostPower;
-                currMovement.carRB.velocity += boostVelocity;
-                currMovement.isBoosting = true;
+                if (currOne != null)
+                {
+                    currMovement.StopCoroutine(currOne);
+                }
+                currMovement.BoostMode(boostPower, false);
             }
         }
 
@@ -25,10 +29,8 @@ namespace GameMechanics
         {
             if (other.gameObject.transform.root.tag == "Player")
             {
-                CarMovementTryTwo currMovement = other.gameObject.transform.root.GetComponent<CarMovementTryTwo>();
-
-                Vector3 boostForce = currMovement.carRB.transform.forward * boostPower;
-                currMovement.carRB.AddForce(boostForce, ForceMode.Acceleration);
+                ArcadeCarMovement currMovement = other.gameObject.transform.root.GetComponent<ArcadeCarMovement>();
+                currMovement.BoostMode(boostPower, true);
             }
         }
 
@@ -36,9 +38,8 @@ namespace GameMechanics
         {
             if (other.gameObject.transform.root.tag == "Player")
             {
-                CarMovementTryTwo currMovement = other.gameObject.transform.root.GetComponent<CarMovementTryTwo>();
-
-                currMovement.isBoosting = false;
+                ArcadeCarMovement currMovement = other.gameObject.transform.root.GetComponent<ArcadeCarMovement>();
+                currOne = StartCoroutine(currMovement.StopBostMode());
             }
         }
     }
