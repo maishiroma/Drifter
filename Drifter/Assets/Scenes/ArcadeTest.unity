@@ -714,6 +714,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: maxTopSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringMod
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: maxTurnSpeed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].time
+      value: -0.009968281
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].time
+      value: 6.7396545
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].value
+      value: 40.052296
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].value
+      value: 38.02561
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544992, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1887822230286544993, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -761,6 +825,14 @@ PrefabInstance:
     - target: {fileID: 1887822230286544994, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
       propertyPath: m_Name
       value: ArcadePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544999, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887822230286544999, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c26a2668a042d04886a38d60027a6bd, type: 3}

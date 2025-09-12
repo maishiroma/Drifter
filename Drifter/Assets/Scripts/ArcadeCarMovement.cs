@@ -29,6 +29,7 @@ namespace Player
         public float maxAccelerateMod;
         public float maxTopSpeed;
         public float maxReverseSpeed;
+        public float maxTurnSpeed;
         public AnimationCurve steeringCurve;
        
         // Private Variables
@@ -70,7 +71,6 @@ namespace Player
             {
                 isAccelerating = false;
             }
-            print("Accelerating: " + isAccelerating);
         }
 
         public void OnBrake(InputAction.CallbackContext context)
@@ -83,13 +83,11 @@ namespace Player
             {
                 isBraking = false;
             }
-            print("Braking: " + isBraking);
         }
 
         public void OnSteer(InputAction.CallbackContext context)
         {
             steerInput = context.ReadValue<float>();
-            print("Steering: " + steerInput);
         }
 
         private void ApplyMotor()
@@ -122,8 +120,11 @@ namespace Player
 
         private void ApplySteering()
         {
-            float steeringAngle = steerInput * steeringCurve.Evaluate(carSpeed);
-            carRB.AddTorque(carRB.transform.up * steeringAngle);
+            if (carRB.angularVelocity.magnitude < maxTurnSpeed)
+            {
+                float steeringAngle = steerInput * steeringCurve.Evaluate(carSpeed);
+                carRB.AddTorque(carRB.transform.up * steeringAngle);
+            }
         }
 
         private void ApplyDrag()
@@ -157,8 +158,7 @@ namespace Player
                 // Below Half of Top Speed
                 results = Mathf.Clamp(Mathf.Lerp(existingOne, 0.01f,  0.1f), 0.01f, 0.1f);
             }
-
-            print("Lerp Speed:"  + results);
+            print(results);
             return results;
         }
 
